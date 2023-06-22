@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Set the API endpoint and GitHub username
+API_END_POINT="https://api.github.com"
+GITHUB_USER="satishjagana123"
+
+# Make a GET request to the GitHub API and store the response in the 'Response' variable
+Response=$(curl -s "$API_END_POINT/users/$GITHUB_USER")
+
+# Extract the desired information using 'jq' and store them in respective variables
+name=$(echo "$Response" | jq -r '.name')
+bio=$(echo "$Response" | jq -r '.bio')
+followers=$(echo "$Response" | jq -r '.followers')
+following=$(echo "$Response" | jq -r '.following')
+repo=$(echo "$Response" | jq -r '.public_repos')
+
+# Display the retrieved information
+echo "Github user: $GITHUB_USER"
+echo "Name: $name"
+echo "Bio: $bio"
+echo "Following: $following"
+echo "Public repositories: $repo"
+echo "Followers: $followers"
